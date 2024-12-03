@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="box">
+        <h1>Administrator Dashboard</h1>
+        <h2>Seating Chart</h2>
+        <p>Reserved seats are marked with "X", and open seats are marked with "O".</p>
+        <div style="text-align: center; font-family: monospace;">
+            {% for row in seat_chart %}
+                {{ row | join(' ') }}<br>
+            {% endfor %}
+        </div>
+        <h2>Total Sales: ${{ total_sales }}</h2>
+    </div>
+</div>
+{% endblock %}

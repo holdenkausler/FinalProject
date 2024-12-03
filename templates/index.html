@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="box">
+        <h1>IT4320 Trip Reservation System</h1>
+        <p>Welcome to the IT-4320 reservation system. Use the select box to choose whether to make a reservation or log in as administrator</p>
+        <form method="POST" action="{{ url_for('index') }}">
+            <label for="menu_option">Choose an Option</label><br>
+            <select id="menu_option" name="menu_option">
+                <option value="" disabled selected>Choose an Option</option>
+                <option value="admin_login">Admin Login</option>
+                <option value="reserve_seat">Reserve a Seat</option>
+            </select><br><br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

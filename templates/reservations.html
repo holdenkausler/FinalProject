@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="box">
+        <h1>Reserve Your Seat</h1>
+        <p>X = Reserved Seat : O = Available Seat</p>
+        <div style="text-align: center; font-family: monospace;">
+            {% for row in seat_chart %}
+                {{ row | join(' ') }}<br>
+            {% endfor %}
+        </div>
+
+        <form method="POST" action="{{ url_for('reservations') }}">
+            <h3>Enter Your Information</h3>
+            <label for="first_name">First Name</label><br>
+            <input type="text" id="first_name" name="first_name" required><br><br>
+
+            <label for="last_name">Last Name</label><br>
+            <input type="text" id="last_name" name="last_name" required><br><br>
+
+            <label for="row">Choose a Row</label><br>
+            <select id="row" name="row" required>
+                {% for i in range(12) %}
+                <option value="{{ i }}">{{ i + 1 }}</option>
+                {% endfor %}
+            </select><br><br>
+
+            <label for="column">Choose a Seat</label><br>
+            <select id="column" name="column" required>
+                {% for j in range(4) %}
+                <option value="{{ j }}">{{ j + 1 }}</option>
+                {% endfor %}
+            </select><br><br>
+
+            <button type="submit">Submit</button>
+        </form>
+        {% if eTicketNumber %}
+        <div class="alert">
+            <strong>Success!</strong> Your eTicket Number is: <strong>{{ eTicketNumber }}</strong>
+        </div>
+        {% endif %}
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div>
+                {% for category, message in messages %}
+                    <p class="{{ category }}">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+    </div>
+</div>
+{% endblock %}
